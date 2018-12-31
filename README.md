@@ -15,23 +15,25 @@ Install using NPM:
 
 To add the functionality of this plugin you should make a custom build of the editor. Follow the instructions [here](https://docs.ckeditor.com/ckeditor5/latest/builds/guides/development/installing-plugins.html).
 
-To load the plugin, configure ckeditor `build-config.js` like this:
+
+To load the plugin, configure ckeditor (e.g. edit file `ckeditor.js`) like this:
+#import plugin
 ```
-    module.exports = {
-	// The editor creator to use, assuming ClassicEditor.
-	editor: '@ckeditor/ckeditor5-editor-classic/src/classiceditor',
+import CustomElement from 'ckeditor5-custom-element/src/customelement';
+```
+#config plugin
+Assuming that the build is based on Classic Editor:
+```
+export default class ClassicEditor extends ClassicEditorBase {}
 
-	// The name under which the editor will be exported.
-	moduleName: 'ClassicEditor',
+	// Plugins to include in the build.
+	ClassicEditor.builtinPlugins = [
+		...
+		CustomElement,
+		...
+	],
 
-
-	plugins: [
-                ...
-                'ckeditor5-math-preview/src/customelement',
-                ...
-	         ],
-
-	config: {
+	ClassicEditor.defaultConfig = {
 		toolbar: {
 			items: [
                     ...
@@ -53,6 +55,8 @@ To load the plugin, configure ckeditor `build-config.js` like this:
 	}
 };
 ```
+
+
 
 ## Use
 For the time being only addition of custom elements is properly impemented. If you want to change from one custom element to another, delete first. 
