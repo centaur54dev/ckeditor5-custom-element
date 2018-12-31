@@ -8,23 +8,26 @@ export default class CustomElemUI extends Plugin {
 
 	init() {
 		const editor 		= this.editor;
-		const items      	= editor.config.get(( 'CustomElement.items ' ))
-		const tags 			= items.map(i=>{return i.tag});
-		const placeholders  = items.map(i=>{return i.placeholder});
-		const attributes    = items.map(i=>{return i.attributes});
+		const items      	= editor.config.get(( 'CustomElement.items' ))
+		// const tags 			= items.map(i=>{return i.tag});
+		// const placeholders  = items.map(i=>{return i.placeholder});
+		// const attributes    = items.map(i=>{return i.attributes});
 		
-		for (let i=0; i<tags.length; i++){
+		for (let i=0; i<items.length; i++){
+			const tag  = items[i].tag;
+			const text = items[i].placeholder;
+			const attr = items[i].attributes;
 			//---schema
-			editor.model.schema.register(tags[i], {
+			editor.model.schema.register(tag, {
 				inheritAllFrom: '$block'
 			});
 
 			//---onversion
-			editor.conversion.elementToElement({ model: tags[i], view: tags[i] });
+			editor.conversion.elementToElement({ model: tag, view: tag });
 
 			//---command
-			const icom =  'custom-element-'+item;
-			editor.commands.add( icom, new CustomElemCommand( editor, tags[index], placeholders[index], attributes  ) );
+			const icom =  'custom-element-'+tag;
+			editor.commands.add( icom, new CustomElemCommand( editor, tag, text, attr  ) );
 
 			//---toolbar
 			this._createToolbarButton(icom);
