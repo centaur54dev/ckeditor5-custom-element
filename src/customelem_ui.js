@@ -10,9 +10,7 @@ export default class CustomElemUI extends Plugin {
 	init() {
 		const editor 		= this.editor;
 		const items      	= editor.config.get(( 'CustomElement.items' ))
-		// const tags 			= items.map(i=>{return i.tag});
-		// const placeholders  = items.map(i=>{return i.placeholder});
-		// const attributes    = items.map(i=>{return i.attributes});
+
 		
 		for (let i=0; i<items.length; i++){
 			const tag  		= items[i].tag;
@@ -41,8 +39,9 @@ export default class CustomElemUI extends Plugin {
 			editor.commands.add( com, new CustomElemCommand( editor, tag, text, attr  ) );
 
 			//---toolbar
-			this._createToolbarButton(com, com, icon);
-
+			let view = this._createToolbarButton(com, com, icon);
+			view.bind( 'isOn', 'isEnabled' ).to( com, 'value', 'isEnabled' );
+			this.listenTo( view, 'execute', () => editor.execute( com ) );
 		}		
 		
 	}
@@ -51,7 +50,7 @@ export default class CustomElemUI extends Plugin {
 	_createToolbarButton(name, command, tbicon) {
 		const editor = this.editor;
 
-		editor.ui.componentFactory.add( name, locale => {
+		return editor.ui.componentFactory.add( name, locale => {
 			const button = new ButtonView( locale );
 
 			button.isEnabled = true;
@@ -59,9 +58,6 @@ export default class CustomElemUI extends Plugin {
 			button.label     = name;
 			button.tooltip   = true;
 			button.icon		 = tbicon;
-
-			button.bind( 'isOn', 'isEnabled' ).to( command, 'value', 'isEnabled' );
-			this.listenTo( button, 'execute', () => editor.execute( name ) );
 
 			return button;
 		} );
