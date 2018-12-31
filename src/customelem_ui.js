@@ -1,15 +1,6 @@
 import Plugin 				from '@ckeditor/ckeditor5-core/src/plugin';
-import ClickObserver 		from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
-// import ContextualBalloon 	from '@ckeditor/ckeditor5-ui/src/panel/balloon/contextualballoon';
-// import clickOutsideHandler 	from '@ckeditor/ckeditor5-ui/src/bindings/clickoutsidehandler';
-// import ButtonView 			from '@ckeditor/ckeditor5-ui/src/button/buttonview';
- import {CustomElemCommand}    from './customelem_commands';
-
-// import MathPreviewConfig 	from './mathpreview_config';
-// import MathPreviewPopupView from './ui/mathpreview_popupview';
-// import * as Utils 	        from './mathpreview_utils';
-// import mathpreviewIcon 		from '../theme/icons/mathpreview.svg';
-
+import ButtonView 			from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import {CustomElemCommand}  from './customelem_command';
 
 
 export default class CustomElemUI extends Plugin {

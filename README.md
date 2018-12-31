@@ -17,12 +17,15 @@ To add the functionality of this plugin you should make a custom build of the ed
 
 
 To load the plugin, configure ckeditor (e.g. edit file `ckeditor.js`) like this:
-#import plugin
+
+#### import plugin
 ```
 import CustomElement from 'ckeditor5-custom-element/src/customelement';
 ```
-#config plugin
+
+#### config plugin
 Assuming that the build is based on Classic Editor:
+
 ```
 export default class ClassicEditor extends ClassicEditorBase {}
 
