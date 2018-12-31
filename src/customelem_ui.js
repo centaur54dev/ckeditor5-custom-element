@@ -39,7 +39,7 @@ export default class CustomElemUI extends Plugin {
 			editor.commands.add( com, new CustomElemCommand( editor, tag, text, attr  ) );
 
 			//---toolbar
-			let view = this._createToolbarButton(com, com, icon);
+			let view = this._createToolbarButton(com, icon);
 			view.bind( 'isOn', 'isEnabled' ).to( com, 'value', 'isEnabled' );
 			this.listenTo( view, 'execute', () => editor.execute( com ) );
 		}		
@@ -47,7 +47,7 @@ export default class CustomElemUI extends Plugin {
 	}
 
 	
-	_createToolbarButton(name, command, tbicon) {
+	_createToolbarButton(name, tbicon) {
 		const editor = this.editor;
 
 		return editor.ui.componentFactory.add( name, locale => {
