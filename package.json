@@ -1,0 +1,19 @@
+{
+  "name": "ckeditor5-custom-element",
+  "version": "0.0.1",
+  "description": "Insert custom elements (html tags) in ckeditor5",
+  "main": "customelement.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ckeditor5",
+    "custom",
+    "element",
+    "custom",
+    "tag",
+    "plugin"
+  ],
+  "author": "centaur54dev",
+  "license": "MIT"
+}
