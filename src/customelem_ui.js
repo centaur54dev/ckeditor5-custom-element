@@ -1,6 +1,7 @@
 import Plugin 				from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView 			from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import {CustomElemCommand}  from './customelem_command';
+import defaultIcon 			from '../theme/icons/default.svg';
 
 
 export default class CustomElemUI extends Plugin {
@@ -14,30 +15,40 @@ export default class CustomElemUI extends Plugin {
 		// const attributes    = items.map(i=>{return i.attributes});
 		
 		for (let i=0; i<items.length; i++){
-			const tag  = items[i].tag;
-			const text = items[i].placeholder;
-			const attr = items[i].attributes;
-			//---schema
+			const tag  		= items[i].tag;
+			const text 		= items[i].placeholder;
+			const attr 		= items[i].attributes;
+			const iconfile 	= items[i].icon;
+			const icon     	= defaultIcon;
+
+			if(typeof iconfile !== 'undefined'){
+				if( iconfile.trim() !== ''){
+					icon = require(iconfile)
+				}
+			}
+
+
+			///schema 	
 			editor.model.schema.register(tag, {
 				inheritAllFrom: '$block'
 			});
 
-			//---onversion
+			//---conversion
 			editor.conversion.elementToElement({ model: tag, view: tag });
 
 			//---command
-			const icom =  'custom-element-'+tag;
-			editor.commands.add( icom, new CustomElemCommand( editor, tag, text, attr  ) );
+			const com =  'custom-element-'+tag;
+			editor.commands.add( com, new CustomElemCommand( editor, tag, text, attr  ) );
 
 			//---toolbar
-			this._createToolbarButton(icom);
+			this._createToolbarButton(com, com, icon);
 
 		}		
 		
 	}
 
 	
-	_createToolbarButton(name) {
+	_createToolbarButton(name, command, tbicon) {
 		const editor = this.editor;
 
 		editor.ui.componentFactory.add( name, locale => {
@@ -47,6 +58,10 @@ export default class CustomElemUI extends Plugin {
 			button.isOn      = true;
 			button.label     = name;
 			button.tooltip   = true;
+			button.icon		 = tbicon;
+
+			button.bind( 'isOn', 'isEnabled' ).to( command, 'value', 'isEnabled' );
+			this.listenTo( button, 'execute', () => editor.execute( name ) );
 
 			return button;
 		} );
