@@ -17,9 +17,10 @@ export default class CustomElemUI extends Plugin {
 
 	init() {
 		const editor 		= this.editor;
-		const tags      	= editor.config.get(( 'CustomElement.tags ' ))
-		const placeholders  = editor.config.get(( 'CustomElement.placeholders ' )) 
-		const attributes    = editor.config.get(( 'CustomElement.attributes ' )) 
+		const items      	= editor.config.get(( 'CustomElement.items ' ))
+		const tags 			= items.map(i=>{return i.tag});
+		const placeholders  = items.map(i=>{return i.placeholder});
+		const attributes    = items.map(i=>{return i.attributes});
 		
 		for (let i=0; i<tags.length; i++){
 			//---schema
@@ -31,7 +32,7 @@ export default class CustomElemUI extends Plugin {
 			editor.conversion.elementToElement({ model: tags[i], view: tags[i] });
 
 			//---command
-			const icom =  'customelem-'+item;
+			const icom =  'custom-element-'+item;
 			editor.commands.add( icom, new CustomElemCommand( editor, tags[index], placeholders[index], attributes  ) );
 
 			//---toolbar
