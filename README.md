@@ -42,11 +42,11 @@ export default class ClassicEditor extends ClassicEditorBase {}
 	ClassicEditor.defaultConfig = {
 		toolbar: {
 			items: [
-					...
-					'custom-element-tagname1',
-					'custom-element-tagname2',
-                    ...
-			       ]
+				...
+				'custom-element-tagname1',
+				'custom-element-tagname2',
+				...
+			    ]
 		},
 
 		CustomElement:{
