@@ -16,12 +16,14 @@ export default class CustomElemUI extends Plugin {
 			const tag  		= items[i].tag;
 			const text 		= items[i].placeholder;
 			const attr 		= items[i].attributes;
-			const iconfile 	= items[i].icon;
-			const icon     	= defaultIcon;
+			const icon	 	= items[i].icon;
 
-			if(typeof iconfile !== 'undefined'){
-				if( iconfile.trim() !== ''){
-					icon = require(iconfile)
+			if(typeof icon === 'undefined'){
+				icon = defaultIcon;
+			}
+			else if (typeof icon === 'string'){
+				if( icon.trim() === ''){
+					icon = defaultIcon;
 				}
 			}
 
@@ -39,9 +41,8 @@ export default class CustomElemUI extends Plugin {
 			editor.commands.add( com, new CustomElemCommand( editor, tag, text, attr  ) );
 
 			//---toolbar
-			let view = this._createToolbarButton(com, icon);
-			view.bind( 'isOn', 'isEnabled' ).to( com, 'value', 'isEnabled' );
-			this.listenTo( view, 'execute', () => editor.execute( com ) );
+			this._createToolbarButton(com, icon);
+			
 		}		
 		
 	}
@@ -50,14 +51,19 @@ export default class CustomElemUI extends Plugin {
 	_createToolbarButton(name, tbicon) {
 		const editor = this.editor;
 
-		return editor.ui.componentFactory.add( name, locale => {
+		editor.ui.componentFactory.add( name, locale => {
 			const button = new ButtonView( locale );
+			const command = editor.commands.get( name );
+
 
 			button.isEnabled = true;
 			button.isOn      = true;
 			button.label     = name;
 			button.tooltip   = true;
 			button.icon		 = tbicon;
+
+			button.bind( 'isOn', 'isEnabled' ).to( command, 'value', 'isEnabled' );
+			this.listenTo( button, 'execute', () => editor.execute( name ) );
 
 			return button;
 		} );
