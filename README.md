@@ -51,8 +51,9 @@ export default class ClassicEditor extends ClassicEditorBase {}
 
 		CustomElement:{
 			items:[
-				{tag: 'tagname1', placeholder: 'some text', attributes:{name:'ABCD'},
-						icon:Icon1, inline:false: editable:false},
+				{tag: 'tagname1', placeholder: 'some text', 
+						attributes:{name:'ABCD'}, icon:Icon1, 
+						inline:false, editable:false},
 				{tag: 'tagname2'},
 				...
 			]
