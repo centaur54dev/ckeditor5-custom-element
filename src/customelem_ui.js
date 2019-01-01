@@ -24,13 +24,12 @@ export default class CustomElemUI extends Plugin {
 			let   icon	 	= this._safeGet(items[i].icon, defaultIcon);
 
 			const attrkeys = Object.keys(attr);
-			const modelattrkeys = attrkeys.map( k=> { return 'custom-elem-data-'+attr[k]})
 
 			//schema
 			if (inline){
 				editor.model.schema.register(tag, {
 					allowWhere: '$text',
-					allowAttributes: modelattrkeys,
+					allowAttributes: attrkeys,
 					isObject: true,
 					isBlock:  true,
 				}); 	
@@ -38,7 +37,7 @@ export default class CustomElemUI extends Plugin {
 			else{
 				editor.model.schema.register(tag, {
 					allowIn: '$root',
-					allowAttributes: modelattrkeys,
+					allowAttributes: attrkeys,
 					isObject: true,
 					isBlock:  true,
 				}); 	
@@ -82,15 +81,15 @@ export default class CustomElemUI extends Plugin {
 				} )
 			);
 			//attribute conversion
-			for (let a=0; a<attr.length; a++){
+			for (let a=0; a<attrkeys.length; a++){
 				editor.conversion.for( 'downcast' ).add( downcastAttributeToAttribute( {
-					model: modelattrkeys[a],
-					view: attr[a],
+					model: attrkeys[a],
+					view: attrkeys[a],
 					converterPriority: 'low'
 				} ) );
 				editor.conversion.for( 'upcast' ).add( upcastAttributeToAttribute( {
-					view: attr[a],
-					model: modelattrkeys[a],
+					view: attrkeys[a],
+					model: attrkeys[a],
 					converterPriority: 'low'
 				} ) );
 			}
