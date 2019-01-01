@@ -16,7 +16,7 @@ export default class CustomElemUI extends Plugin {
 			const tag  		= items[i].tag;
 			const text 		= items[i].placeholder;
 			const attr 		= items[i].attributes;
-			const icon	 	= items[i].icon;
+			let   icon	 	= items[i].icon;
 
 			if(typeof icon === 'undefined'){
 				icon = defaultIcon;
