@@ -28,7 +28,8 @@ export default class CustomElemUI extends Plugin {
 			if (editable){
 				editor.model.schema.register(tag, {
 					allowWhere: inline? '$text' : '$block',
-					allowContentOf: '$text',
+					allowContentOf: '$block',
+					allowAttributesOf: attr.keys(),
 					isObject: false,
 					isBlock:  true,
 					isLimit:  true
@@ -37,7 +38,9 @@ export default class CustomElemUI extends Plugin {
 			else{
 				editor.model.schema.register(tag, {
 					allowWhere: inline? '$text' : '$block',
-					isObject: true
+					allowAttributesOf: attr.keys(),
+					isObject: true,
+					isBlock: true
 				}); 
 			}
 			
