@@ -26,7 +26,7 @@ export default class CustomElemUI extends Plugin {
 			///schema
 			editor.model.schema.register(tag, {
 				allowWhere: block? '$block' : '$text',
-				isObject: block
+				isObject: true
 			}); 			
 			editor.model.schema.extend( '$text', {
 				allowIn: tag
@@ -42,10 +42,12 @@ export default class CustomElemUI extends Plugin {
 			editor.conversion.for( 'editingDowncast' ).add(
 				downcastElementToElement( {
 					model: tag,
-					view: ( modelItem, viewWriter ) => {
-						const widgetElement = viewWriter.createContainerElement( tag );
-						return toWidget( widgetElement, viewWriter );
-					}
+					view: 
+						block? ( modelItem, viewWriter ) => {
+									const widgetElement = viewWriter.createContainerElement( tag );
+									return toWidget( widgetElement, viewWriter );
+								}
+						: tag
 				} )
 			);
 			editor.conversion.for( 'dataDowncast' ).add(
