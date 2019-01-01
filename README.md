@@ -62,6 +62,9 @@ export default class ClassicEditor extends ClassicEditorBase {}
 	}
 };
 ```
+*Note: the toolbar item names should have the format: `custom-element-tagname`, where `tagname` should be replaced by the respective tag of the custom element, the button is going to insert.*
+
+
 
 ## Custom element(s) options
 The elements can be customized through the CustomElement object that is passed to the editor, as shown above. Many different custom elements can be defined. The following options are available for each one:
