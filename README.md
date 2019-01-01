@@ -66,15 +66,13 @@ export default class ClassicEditor extends ClassicEditorBase {}
 
 ## Custom element(s) options
 The elements can be customized through the CustomElement object that is passed to the editor, as shown above. Many different custom elements can be defined. The following options are available for each one:
-* _tag_ : (string) the tag name for the created custom elements,
-* _placeholder_ : (optional)(string) the text to be displayed inside the custom element (as a text node). If missing, the tag name is displayed,
-* _attributes_: (optional)(object) any attributes for the created custom elements,
-* _icon_: (optional)(icon object) icon for the respective toolbar button. If missing, a default icon is used that looks like this: [#],
-* _inline_: (optional)(boolean) if true, the custom element can be placed inline with text, othrewise it is placed only in its own line. Defaults to false,
-* _editable_: (optional)(boolean) if true, the text inside the custom element can be modified. Defaults to false. 
+* `tag` : (string) the tag name for the created custom elements,
+* `placeholder` : (optional)(string) the text to be displayed inside the custom element (as a text node). If missing, the tag name is displayed,
+* `attributes`: (optional)(object) any attributes for the created custom elements,
+* `icon`: (optional)(icon object) icon for the respective toolbar button. If missing, a default icon is used that looks like this: [#],
+* `inline`: (optional)(boolean) if true, the custom element can be placed inline with text, othrewise it is placed only in its own line. Defaults to false,
+* `editable`: (optional)(boolean) if true, the text inside the custom element can be modified. Defaults to false. 
 
 
 ## Use
-The created custom elements are displayed as widgets (they are selectable by a single click on them, within a bordered box )
-
 For the time being only addition of custom elements is implemented. If you want to replace a custom element with another, delete first. 

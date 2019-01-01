@@ -25,13 +25,23 @@ export default class CustomElemUI extends Plugin {
 
 			const attrkeys = Object.keys(attr);
 
-
-			editor.model.schema.register(tag, {
-				allowWhere: inline? '$text' : '$root',
-				allowAttributesOf: attrkeys,
-				isObject: true,
-				isBlock:  true,
-			}); 
+			if (inline){
+				editor.model.schema.register(tag, {
+					allowWhere: '$text',
+					allowAttributesOf: attrkeys,
+					isObject: true,
+					isBlock:  true,
+				}); 	
+			}
+			else{
+				editor.model.schema.register(tag, {
+					allowIn: '$root',
+					allowAttributesOf: attrkeys,
+					isObject: true,
+					isBlock:  true,
+				}); 	
+			}
+			
 
 
 			// ///schema
