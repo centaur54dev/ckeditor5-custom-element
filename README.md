@@ -35,7 +35,7 @@ export default class ClassicEditor extends ClassicEditorBase {}
 	// Plugins to include in the build.
 	ClassicEditor.builtinPlugins = [
 		...
-		CustomElement,
+		CustomElementPlugin,
 		...
 	],
 
