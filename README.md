@@ -1,9 +1,7 @@
 # ckeditor5-custom-element
-#Warning 
-Under development
 
 ## About
-This is a plugin for [ckeditor 5](https://github.com/ckeditor/ckeditor5). It allows to add custom elements in the editor. The html conversion of the created elements is like this:
+This is a plugin for [ckeditor 5](https://github.com/ckeditor/ckeditor5). It allows to add custom elements in the editor. The html conversion of the created elements looks like this:
 ```
 	<CustomTag>placeholder text</CustomTag>
 ```
@@ -44,8 +42,8 @@ export default class ClassicEditor extends ClassicEditorBase {}
 	ClassicEditor.defaultConfig = {
 		toolbar: {
 			items: [
-                    ...
-                    'custom-element-tagname1',
+					...
+					'custom-element-tagname1',
 					'custom-element-tagname2',
                     ...
 			       ]
@@ -53,7 +51,8 @@ export default class ClassicEditor extends ClassicEditorBase {}
 
 		CustomElement:{
 			items:[
-				{tag: 'tagname1', placeholder: 'some text', attributes:{name:'ABCD'}, icon:Icon1, inline:false: editable:false},
+				{tag: 'tagname1', placeholder: 'some text', attributes:{name:'ABCD'},
+						icon:Icon1, inline:false: editable:false},
 				{tag: 'tagname2'},
 				...
 			]
@@ -70,7 +69,7 @@ The elements can be customized through the CustomElement object that is passed t
 * `placeholder` : (optional)(string) the text to be displayed inside the custom element (as a text node). If missing, the tag name is displayed,
 * `attributes`: (optional)(object) any attributes for the created custom elements,
 * `icon`: (optional)(icon object) icon for the respective toolbar button. If missing, a default icon is used that looks like this: [#],
-* `inline`: (optional)(boolean) if true, the custom element can be placed inline with text, othrewise it is placed only in its own line. Defaults to false,
+* `inline`: (optional)(boolean) if true, the custom element can be nested within other blocks (e.g. between text), othrewise it is placed only as a root element. Defaults to false,
 * `editable`: (optional)(boolean) if true, the text inside the custom element can be modified. Defaults to false. 
 
 
