@@ -18,7 +18,7 @@ To load the plugin, configure ckeditor (e.g. edit file `ckeditor.js`) like this:
 
 #### Import plugin
 ```
-import CustomElement from 'ckeditor5-custom-element/src/customelement';
+import CustomElementPlugin from 'ckeditor5-custom-element/src/customelement';
 ```
 
 #### Import toolbar icons (optional)

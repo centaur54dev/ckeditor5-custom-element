@@ -10,7 +10,7 @@ export default class CustomElement extends Plugin {
 
 
 	static get pluginName() {
-		return 'CustomElementPlugin';
+		return 'CustomElement';
 	}
 
 
