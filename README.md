@@ -23,6 +23,11 @@ To load the plugin, configure ckeditor (e.g. edit file `ckeditor.js`) like this:
 import CustomElement from 'ckeditor5-custom-element/src/customelement';
 ```
 
+#### import toolbar icons (optional)
+```
+import Icon1 from 'path-to-icon/iconfile.svg';
+```
+
 #### config plugin
 Assuming that the build is based on Classic Editor:
 
@@ -48,8 +53,8 @@ export default class ClassicEditor extends ClassicEditorBase {}
 
 		CustomElement:{
 			items:[
-				{tag: 'tagname1', placeholder: 'some text', attributes:{}},
-				{tag: 'tagname2', placeholder: 'some text', attributes:{}},
+				{tag: 'tagname1', placeholder: 'some text', attributes:{name:'ABCD'}, icon:Icon1, inline:false: editable:false},
+				{tag: 'tagname2'},
 				...
 			]
 		},
@@ -59,7 +64,17 @@ export default class ClassicEditor extends ClassicEditorBase {}
 };
 ```
 
+## Element options
+The elements can be customized through CustomElement object that is passed to the editor, as shown above. Many different custom elements can be defined. The following options are available for each one:
+* tag : (string) the tag name for the created custom elements,
+* placeholder : (optional)(string) the text to be displayed inside the custom element (as a text node). If missing, the tag name is displayed,
+* attributes: (optional)(object) any attributes for the created custom elements,
+* icon: (optional)(icon object) icon for the respective toolbar button,
+* inline: (optional)(boolean) if true, the custom element can be placed inline with text, othrewise it is placed only in its own line. Defaults to false,
+* editable: (optional)(boolean) if true, the text inside the custom element can be modified. Defaults to false. 
 
 
 ## Use
-For the time being only addition of custom elements is properly impemented. If you want to change from one custom element to another, delete first. 
+The created custom elements are displayed as widgets (they are selectable by a single click on them, within a bordered box )
+
+For the time being only addition of custom elements is implemented. If you want to replace a custom element with another, delete first. 
