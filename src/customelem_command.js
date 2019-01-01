@@ -5,12 +5,13 @@ import { findOptimalInsertionPosition} from '@ckeditor/ckeditor5-widget/src/util
 
 export class CustomElemCommand extends Command {
 
-    constructor( editor, tagName, placeholder, attributes ) {
+    constructor( editor, tagName, placeholder, inline, attributes ) {
         super( editor );
         
         this.tagName     = tagName;
         this.placeholder = placeholder;
         this.attributes  = attributes;
+        this.inline      = inline;
     };
 
 
@@ -21,7 +22,8 @@ export class CustomElemCommand extends Command {
 			
             const elem = writer.createElement( this.tagName, this.attributes );
             writer.appendText(this.placeholder, elem);
-            const insertAtSelection = findOptimalInsertionPosition( model.document.selection, model );
+            const insertAtSelection = this.inline? model.document.selection.getFirstPosition()
+                                                 : findOptimalInsertionPosition( model.document.selection, model );
             model.insertContent( elem, insertAtSelection );
 
             if ( elem.parent ) {

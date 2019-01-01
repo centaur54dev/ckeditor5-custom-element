@@ -19,14 +19,15 @@ export default class CustomElemUI extends Plugin {
 			const tag  		= items[i].tag;
 			const text 		= this._safeGet(items[i].placeholder, tag);
 			const attr 		= this._safeGet(items[i].attributes, {});
-			const block		= this._safeGet(items[i].block, true);
+			const inline	= this._safeGet(items[i].inline, false);
+			const editable	= this._safeGet(items[i].editable, false);
 			let   icon	 	= this._safeGet(items[i].icon, defaultIcon);
 
 
 			///schema
 			editor.model.schema.register(tag, {
-				allowWhere: block? '$block' : '$text',
-				isObject: true
+				allowWhere: inline? '$text' : '$block',
+				isObject: !editable
 			}); 			
 			editor.model.schema.extend( '$text', {
 				allowIn: tag
@@ -42,12 +43,10 @@ export default class CustomElemUI extends Plugin {
 			editor.conversion.for( 'editingDowncast' ).add(
 				downcastElementToElement( {
 					model: tag,
-					view: 
-						block? ( modelItem, viewWriter ) => {
-									const widgetElement = viewWriter.createContainerElement( tag );
-									return toWidget( widgetElement, viewWriter );
-								}
-						: tag
+					view: ( modelItem, viewWriter ) => {
+							const widgetElement = viewWriter.createContainerElement( tag );
+							return toWidget( widgetElement, viewWriter );
+						}
 				} )
 			);
 			editor.conversion.for( 'dataDowncast' ).add(
@@ -63,11 +62,9 @@ export default class CustomElemUI extends Plugin {
 				} )
 			);
 
-
-
 			//---command
 			const com =  'custom-element-'+tag;
-			editor.commands.add( com, new CustomElemCommand( editor, tag, text, attr  ) );
+			editor.commands.add( com, new CustomElemCommand( editor, tag, text, inline, attr  ) );
 
 			//---toolbar
 			this._createToolbarButton(com, icon);
