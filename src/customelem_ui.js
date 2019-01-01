@@ -25,10 +25,22 @@ export default class CustomElemUI extends Plugin {
 
 
 			///schema
-			editor.model.schema.register(tag, {
-				allowWhere: inline? '$text' : '$block',
-				isObject: !editable
-			}); 			
+			if (editable){
+				editor.model.schema.register(tag, {
+					allowWhere: inline? '$text' : '$block',
+					allowContentOf: '$text',
+					isObject: false,
+					isBlock:  true,
+					isLimit:  true
+				}); 
+			}
+			else{
+				editor.model.schema.register(tag, {
+					allowWhere: inline? '$text' : '$block',
+					isObject: true
+				}); 
+			}
+			
 			editor.model.schema.extend( '$text', {
 				allowIn: tag
 			} );
