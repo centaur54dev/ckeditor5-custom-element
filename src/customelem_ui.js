@@ -17,23 +17,15 @@ export default class CustomElemUI extends Plugin {
 		
 		for (let i=0; i<items.length; i++){
 			const tag  		= items[i].tag;
-			const text 		= items[i].placeholder;
-			const attr 		= items[i].attributes;
-			let   icon	 	= items[i].icon;
-
-			if(typeof icon === 'undefined'){
-				icon = defaultIcon;
-			}
-			else if (typeof icon === 'string'){
-				if( icon.trim() === ''){
-					icon = defaultIcon;
-				}
-			}
+			const text 		= this._safeGet(items[i].placeholder, tag);
+			const attr 		= this._safeGet(items[i].attributes, {});
+			const block		= this._safeGet(items[i].block, true);
+			let   icon	 	= this._safeGet(items[i].icon, defaultIcon);
 
 
 			///schema
 			editor.model.schema.register(tag, {
-				allowWhere: '$block',
+				allowWhere: block? '$block' : '$text',
 				isObject: true
 			}); 			
 			editor.model.schema.extend( '$text', {
@@ -104,5 +96,14 @@ export default class CustomElemUI extends Plugin {
 		} );
 	}
 
+
+	_safeGet(input, safeDefault){
+		if( typeof input !== 'undefined' &&  (input || input===false || input===0) ){
+			return input;
+		}
+		else{
+			return safeDefault;
+		}
+	}
 }
 
