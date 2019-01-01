@@ -28,13 +28,45 @@ export default class CustomElemUI extends Plugin {
 			}
 
 
-			///schema 	
+			///schema
 			editor.model.schema.register(tag, {
-				inheritAllFrom: '$block'
-			});
+				allowWhere: '$block',
+				isObject: true
+			}); 			
+			editor.model.schema.extend( '$text', {
+				allowIn: tag
+			} );
+			// editor.model.schema.register(tag, {
+			// 	inheritAllFrom: '$block'
+			// });
+
+
 
 			//---conversion
-			editor.conversion.elementToElement({ model: tag, view: tag });
+			//editor.conversion.elementToElement({ model: tag, view: tag });
+			editor.conversion.for( 'editingDowncast' ).add(
+				downcastElementToElement( {
+					model: tag,
+					view: ( modelItem, viewWriter ) => {
+						const widgetElement = viewWriter.createContainerElement( tag );
+						return toWidget( widgetElement, viewWriter );
+					}
+				} )
+			);
+			editor.conversion.for( 'dataDowncast' ).add(
+				downcastElementToElement( {
+					model: tag,
+					view: tag
+				} )
+			);	
+			editor.conversion.for( 'upcast' ).add(
+				upcastElementToElement( {
+					view: tag,
+					model: tag
+				} )
+			);
+
+
 
 			//---command
 			const com =  'custom-element-'+tag;
