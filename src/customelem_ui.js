@@ -23,13 +23,15 @@ export default class CustomElemUI extends Plugin {
 			const editable	= this._safeGet(items[i].editable, false);
 			let   icon	 	= this._safeGet(items[i].icon, defaultIcon);
 
+			const attrkeys = Object.keys(attr);
 
+			
 			///schema
 			if (editable){
 				editor.model.schema.register(tag, {
 					allowWhere: inline? '$text' : '$block',
 					allowContentOf: '$block',
-					allowAttributesOf: attr.keys(),
+					allowAttributesOf: attrkeys,
 					isObject: false,
 					isBlock:  true,
 					isLimit:  true
@@ -38,7 +40,7 @@ export default class CustomElemUI extends Plugin {
 			else{
 				editor.model.schema.register(tag, {
 					allowWhere: inline? '$text' : '$block',
-					allowAttributesOf: attr.keys(),
+					allowAttributesOf: attrkeys,
 					isObject: true,
 					isBlock: true
 				}); 
