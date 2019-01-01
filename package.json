@@ -1,6 +1,6 @@
 {
   "name": "ckeditor5-custom-element",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Insert custom elements (html tags) in ckeditor5 (under development)",
   "main": "customelement.js",
   "scripts": {
