@@ -25,26 +25,34 @@ export default class CustomElemUI extends Plugin {
 
 			const attrkeys = Object.keys(attr);
 
-			
-			///schema
-			if (editable){
-				editor.model.schema.register(tag, {
-					allowWhere: inline? '$text' : '$block',
-					allowContentOf: '$block',
-					allowAttributesOf: attrkeys,
-					isObject: false,
-					isBlock:  true,
-					isLimit:  true
-				}); 
-			}
-			else{
-				editor.model.schema.register(tag, {
-					allowWhere: inline? '$text' : '$block',
-					allowAttributesOf: attrkeys,
-					isObject: true,
-					isBlock: true
-				}); 
-			}
+
+			editor.model.schema.register(tag, {
+				allowWhere: inline? '$text' : '$root',
+				allowAttributesOf: attrkeys,
+				isObject: true,
+				isBlock:  true,
+			}); 
+
+
+			// ///schema
+			// if (editable){
+			// 	editor.model.schema.register(tag, {
+			// 		allowWhere: inline? '$text' : '$root',
+			// 		allowContentOf: '$block',
+			// 		allowAttributesOf: attrkeys,
+			// 		isObject: false,
+			// 		isBlock:  true,
+			// 		isLimit:  true
+			// 	}); 
+			// }
+			// else{
+			// 	editor.model.schema.register(tag, {
+			// 		allowWhere: inline? '$text' : '$root',
+			// 		allowAttributesOf: attrkeys,
+			// 		isObject: true,
+			// 		isBlock: true
+			// 	}); 
+			// }
 			
 			editor.model.schema.extend( '$text', {
 				allowIn: tag
@@ -58,13 +66,22 @@ export default class CustomElemUI extends Plugin {
 			//---conversion
 			//editor.conversion.elementToElement({ model: tag, view: tag });
 			editor.conversion.for( 'editingDowncast' ).add(
-				downcastElementToElement( {
-					model: tag,
-					view: ( modelItem, viewWriter ) => {
-							const widgetElement = viewWriter.createContainerElement( tag );
-							return toWidget( widgetElement, viewWriter );
-						}
-				} )
+				editable?
+					downcastElementToElement( {
+						model: tag,
+						view: ( modelItem, viewWriter ) => {
+								const widgetElement = viewWriter.createContainerElement( tag );
+								return toWidgetEditable( widgetElement, viewWriter );
+							}
+					} )
+				:
+					downcastElementToElement( {
+						model: tag,
+						view: ( modelItem, viewWriter ) => {
+								const widgetElement = viewWriter.createContainerElement( tag );
+								return toWidget( widgetElement, viewWriter );
+							}
+					} )
 			);
 			editor.conversion.for( 'dataDowncast' ).add(
 				downcastElementToElement( {

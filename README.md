@@ -18,17 +18,17 @@ To add the functionality of this plugin you should make a custom build of the ed
 
 To load the plugin, configure ckeditor (e.g. edit file `ckeditor.js`) like this:
 
-#### import plugin
+#### Import plugin
 ```
 import CustomElement from 'ckeditor5-custom-element/src/customelement';
 ```
 
-#### import toolbar icons (optional)
+#### Import toolbar icons (optional)
 ```
 import Icon1 from 'path-to-icon/iconfile.svg';
 ```
 
-#### config plugin
+#### Configure plugin
 Assuming that the build is based on Classic Editor:
 
 ```
@@ -64,14 +64,14 @@ export default class ClassicEditor extends ClassicEditorBase {}
 };
 ```
 
-## Element options
-The elements can be customized through CustomElement object that is passed to the editor, as shown above. Many different custom elements can be defined. The following options are available for each one:
-* tag : (string) the tag name for the created custom elements,
-* placeholder : (optional)(string) the text to be displayed inside the custom element (as a text node). If missing, the tag name is displayed,
-* attributes: (optional)(object) any attributes for the created custom elements,
-* icon: (optional)(icon object) icon for the respective toolbar button,
-* inline: (optional)(boolean) if true, the custom element can be placed inline with text, othrewise it is placed only in its own line. Defaults to false,
-* editable: (optional)(boolean) if true, the text inside the custom element can be modified. Defaults to false. 
+## Custom element(s) options
+The elements can be customized through the CustomElement object that is passed to the editor, as shown above. Many different custom elements can be defined. The following options are available for each one:
+* _tag_ : (string) the tag name for the created custom elements,
+* _placeholder_ : (optional)(string) the text to be displayed inside the custom element (as a text node). If missing, the tag name is displayed,
+* _attributes_: (optional)(object) any attributes for the created custom elements,
+* _icon_: (optional)(icon object) icon for the respective toolbar button. If missing, a default icon is used that looks like this: [#],
+* _inline_: (optional)(boolean) if true, the custom element can be placed inline with text, othrewise it is placed only in its own line. Defaults to false,
+* _editable_: (optional)(boolean) if true, the text inside the custom element can be modified. Defaults to false. 
 
 
 ## Use
