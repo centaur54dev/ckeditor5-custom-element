@@ -1,7 +1,7 @@
 import Plugin 				from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView 			from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import { downcastElementToElement } from '@ckeditor/ckeditor5-engine/src/conversion/downcast-converters';
-import { upcastElementToElement } 	from '@ckeditor/ckeditor5-engine/src/conversion/upcast-converters';
+import { downcastElementToElement, downcastAttributeToAttribute } from '@ckeditor/ckeditor5-engine/src/conversion/downcast-converters';
+import { upcastElementToElement, upcastAttributeToAttribute } 	from '@ckeditor/ckeditor5-engine/src/conversion/upcast-converters';
 import { toWidget, toWidgetEditable } 				from '@ckeditor/ckeditor5-widget/src/utils';
 import {CustomElemCommand}  from './customelem_command';
 import defaultIcon 			from '../theme/icons/default.svg';
@@ -24,11 +24,13 @@ export default class CustomElemUI extends Plugin {
 			let   icon	 	= this._safeGet(items[i].icon, defaultIcon);
 
 			const attrkeys = Object.keys(attr);
+			const modelattrkeys = attrkeys.map( k=> { return 'custom-elem-data-'+attr[k]})
 
+			//schema
 			if (inline){
 				editor.model.schema.register(tag, {
 					allowWhere: '$text',
-					allowAttributes: attrkeys,
+					allowAttributes: modelattrkeys,
 					isObject: true,
 					isBlock:  true,
 				}); 	
@@ -36,45 +38,19 @@ export default class CustomElemUI extends Plugin {
 			else{
 				editor.model.schema.register(tag, {
 					allowIn: '$root',
-					allowAttributes: attrkeys,
+					allowAttributes: modelattrkeys,
 					isObject: true,
 					isBlock:  true,
 				}); 	
 			}
 			
-
-
-			// ///schema
-			// if (editable){
-			// 	editor.model.schema.register(tag, {
-			// 		allowWhere: inline? '$text' : '$root',
-			// 		allowContentOf: '$block',
-			// 		allowAttributesOf: attrkeys,
-			// 		isObject: false,
-			// 		isBlock:  true,
-			// 		isLimit:  true
-			// 	}); 
-			// }
-			// else{
-			// 	editor.model.schema.register(tag, {
-			// 		allowWhere: inline? '$text' : '$root',
-			// 		allowAttributesOf: attrkeys,
-			// 		isObject: true,
-			// 		isBlock: true
-			// 	}); 
-			// }
 			
 			editor.model.schema.extend( '$text', {
 				allowIn: tag
 			} );
-			// editor.model.schema.register(tag, {
-			// 	inheritAllFrom: '$block'
-			// });
-
 
 
 			//---conversion
-			//editor.conversion.elementToElement({ model: tag, view: tag });
 			editor.conversion.for( 'editingDowncast' ).add(
 				editable?
 					downcastElementToElement( {
@@ -105,6 +81,20 @@ export default class CustomElemUI extends Plugin {
 					model: tag
 				} )
 			);
+			//attribute conversion
+			for (let a=0; a<attr.length; a++){
+				editor.conversion.for( 'downcast' ).add( downcastAttributeToAttribute( {
+					model: modelattrkeys[a],
+					view: attr[a],
+					converterPriority: 'low'
+				} ) );
+				editor.conversion.for( 'upcast' ).add( upcastAttributeToAttribute( {
+					view: attr[a],
+					model: modelattrkeys[a],
+					converterPriority: 'low'
+				} ) );
+			}
+			
 
 			//---command
 			const com =  'custom-element-'+tag;
