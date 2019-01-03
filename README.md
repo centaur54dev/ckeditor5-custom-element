@@ -1,4 +1,4 @@
-https://david-dm.org/centaur54dev/ckeditor5-custom-element.svg
+[![devDependency Status](https://david-dm.org/centaur54dev/ckeditor5-custom-element/dev-status.svg)](https://david-dm.org/centaur54dev/ckeditor5-custom-element?type=dev)
 
 # ckeditor5-custom-element
 
