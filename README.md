@@ -1,5 +1,6 @@
 
 # ckeditor5-custom-element
+[![npm version](https://badge.fury.io/js/ckeditor5-custom-element.svg)](https://badge.fury.io/js/ckeditor5-custom-element)
 [![Dependency Status](https://david-dm.org/centaur54dev/ckeditor5-custom-element/status.svg)](https://david-dm.org/centaur54dev/ckeditor5-custom-element)
 [![devDependency Status](https://david-dm.org/centaur54dev/ckeditor5-custom-element/dev-status.svg)](https://david-dm.org/centaur54dev/ckeditor5-custom-element?type=dev)
 
