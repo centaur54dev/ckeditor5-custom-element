@@ -1,7 +1,7 @@
-[![Dependency Status](https://david-dm.org/centaur54dev/ckeditor5-custom-element/status.svg)](https://david-dm.org/centaur54dev/ckeditor5-custom-element)
-[![devDependency Status](https://david-dm.org/centaur54dev/ckeditor5-custom-element/dev-status.svg)](https://david-dm.org/centaur54dev/ckeditor5-custom-element?type=dev)
 
 # ckeditor5-custom-element
+[![Dependency Status](https://david-dm.org/centaur54dev/ckeditor5-custom-element/status.svg)](https://david-dm.org/centaur54dev/ckeditor5-custom-element)
+[![devDependency Status](https://david-dm.org/centaur54dev/ckeditor5-custom-element/dev-status.svg)](https://david-dm.org/centaur54dev/ckeditor5-custom-element?type=dev)
 
 ## About
 This is a plugin for [ckeditor 5](https://github.com/ckeditor/ckeditor5). It allows to add custom elements in the editor. The html conversion of the created elements looks like this:
