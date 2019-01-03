@@ -1,3 +1,5 @@
+https://david-dm.org/centaur54dev/ckeditor5-custom-element.svg
+
 # ckeditor5-custom-element
 
 ## About
