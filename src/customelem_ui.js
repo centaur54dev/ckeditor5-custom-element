@@ -1,7 +1,7 @@
 import Plugin 				from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView 			from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import { downcastElementToElement, downcastAttributeToAttribute } from '@ckeditor/ckeditor5-engine/src/conversion/downcast-converters';
-import { upcastElementToElement, upcastAttributeToAttribute } 	from '@ckeditor/ckeditor5-engine/src/conversion/upcast-converters';
+//import { downcastElementToElement, downcastAttributeToAttribute } from '@ckeditor/ckeditor5-engine/src/conversion/downcast-converters';
+//import { upcastElementToElement, upcastAttributeToAttribute } 	from '@ckeditor/ckeditor5-engine/src/conversion/upcast-converters';
 import { toWidget, toWidgetEditable } 				from '@ckeditor/ckeditor5-widget/src/utils';
 import {CustomElemCommand}  from './customelem_command';
 import defaultIcon 			from '../theme/icons/default.svg';
@@ -50,9 +50,9 @@ export default class CustomElemUI extends Plugin {
 
 
 			//---conversion
-			editor.conversion.for( 'editingDowncast' ).add(
+			editor.conversion.for( 'editingDowncast' ).elementToElement(
 				editable?
-					downcastElementToElement( {
+					( {
 						model: tag,
 						view: ( modelItem, viewWriter ) => {
 								const widgetElement = viewWriter.createContainerElement( tag );
@@ -60,7 +60,7 @@ export default class CustomElemUI extends Plugin {
 							}
 					} )
 				:
-					downcastElementToElement( {
+					( {
 						model: tag,
 						view: ( modelItem, viewWriter ) => {
 								const widgetElement = viewWriter.createContainerElement( tag );
@@ -68,26 +68,26 @@ export default class CustomElemUI extends Plugin {
 							}
 					} )
 			);
-			editor.conversion.for( 'dataDowncast' ).add(
-				downcastElementToElement( {
+			editor.conversion.for( 'dataDowncast' ).elementToElement(
+				( {
 					model: tag,
 					view: tag
 				} )
 			);	
-			editor.conversion.for( 'upcast' ).add(
-				upcastElementToElement( {
+			editor.conversion.for( 'upcast' ).elementToElement(
+				( {
 					view: tag,
 					model: tag
 				} )
 			);
 			//attribute conversion
 			for (let a=0; a<attrkeys.length; a++){
-				editor.conversion.for( 'downcast' ).add( downcastAttributeToAttribute( {
+				editor.conversion.for( 'downcast' ).attributeToAttribute( ( {
 					model: attrkeys[a],
 					view: attrkeys[a],
 					converterPriority: 'low'
 				} ) );
-				editor.conversion.for( 'upcast' ).add( upcastAttributeToAttribute( {
+				editor.conversion.for( 'upcast' ).add( attributeToAttribute( {
 					view: attrkeys[a],
 					model: attrkeys[a],
 					converterPriority: 'low'
