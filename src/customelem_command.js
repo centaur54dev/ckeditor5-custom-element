@@ -1,5 +1,5 @@
 import Command 				from '@ckeditor/ckeditor5-core/src/command';
-import { findOptimalInsertionPosition} from '@ckeditor/ckeditor5-widget/src/utils';
+//import { findOptimalInsertionPosition} from '@ckeditor/ckeditor5-widget/src/utils';
 
 
 

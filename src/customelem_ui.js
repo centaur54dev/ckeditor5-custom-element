@@ -1,7 +1,5 @@
 import Plugin 				from '@ckeditor/ckeditor5-core/src/plugin';
 import ButtonView 			from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-//import { downcastElementToElement, downcastAttributeToAttribute } from '@ckeditor/ckeditor5-engine/src/conversion/downcast-converters';
-//import { upcastElementToElement, upcastAttributeToAttribute } 	from '@ckeditor/ckeditor5-engine/src/conversion/upcast-converters';
 import { toWidget, toWidgetEditable } 				from '@ckeditor/ckeditor5-widget/src/utils';
 import {CustomElemCommand}  from './customelem_command';
 import defaultIcon 			from '../theme/icons/default.svg';
