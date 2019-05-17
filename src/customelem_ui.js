@@ -85,11 +85,11 @@ export default class CustomElemUI extends Plugin {
 					view: attrkeys[a],
 					converterPriority: 'low'
 				} ) );
-				editor.conversion.for( 'upcast' ).add( attributeToAttribute( {
+				editor.conversion.for( 'upcast' ). attributeToAttribute( {
 					view: attrkeys[a],
 					model: attrkeys[a],
 					converterPriority: 'low'
-				} ) );
+				} );
 			}
 			
 
