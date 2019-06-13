@@ -10,6 +10,7 @@ This is a plugin for [ckeditor 5](https://github.com/ckeditor/ckeditor5). It all
 	<CustomTag>placeholder text</CustomTag>
 ```
 
+
 ## Install
 Install using NPM: 
 
