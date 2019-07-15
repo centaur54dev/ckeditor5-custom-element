@@ -37,36 +37,36 @@ Assuming that the build is based on Classic Editor:
 ```
 export default class ClassicEditor extends ClassicEditorBase {}
 
-	// Plugins to include in the build.
-	ClassicEditor.builtinPlugins = [
-		...
-		CustomElementPlugin,
-		...
-	],
+// Plugins to include in the build.
+ClassicEditor.builtinPlugins = [
+	...
+	CustomElementPlugin,
+	...
+],
 
-	ClassicEditor.defaultConfig = {
-		toolbar: {
-			items: [
-				...
-				'custom-element-tagname1',
-				'custom-element-tagname2',
-				...
-			    ]
-		},
-
-		CustomElement:{
-			items:[
-				{tag: 'tagname1', placeholder: 'some text', 
-						attributes:{name:'ABCD'}, icon:Icon1, 
-						inline:false, editable:false},
-				{tag: 'tagname2'},
-				...
+ClassicEditor.defaultConfig = {
+	toolbar: {
+		items: [
+			...
+			'custom-element-tagname1',
+			'custom-element-tagname2',
+			...
 			]
-		},
+	},
 
-        ...OTHER OPTIONS
-	}
+	CustomElement:{
+		items:[
+			{tag: 'tagname1', placeholder: 'some text', 
+					attributes:{name:'ABCD'}, icon:Icon1, 
+					inline:false, editable:false},
+			{tag: 'tagname2'},
+			...
+		]
+	},
+
+	...OTHER OPTIONS
 };
+
 ```
 *Note: the toolbar item names should have the format: `custom-element-tagname`, where `tagname` should be replaced by the respective tag of the custom element, the button is going to insert.*
 
