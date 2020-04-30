@@ -15,9 +15,9 @@
     "plugin"
   ],
   "dependencies": {
-    "@ckeditor/ckeditor5-core": "^18.0.0",
-    "@ckeditor/ckeditor5-ui": "^18.0.0",
-    "@ckeditor/ckeditor5-widget": "^18.0.0"
+    "@ckeditor/ckeditor5-core": "^19.0.0",
+    "@ckeditor/ckeditor5-ui": "^19.0.0",
+    "@ckeditor/ckeditor5-widget": "^19.0.0"
   },
   "repository": {
     "type": "git",
