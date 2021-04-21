@@ -52,17 +52,19 @@ export default class CustomElemUI extends Plugin {
 				editable?
 					( {
 						model: tag,
-						view: ( modelItem, viewWriter ) => {
-								const widgetElement = viewWriter.createContainerElement( tag );
-								return toWidgetEditable( widgetElement, viewWriter );
+						view: ( modelItem, conversionApi ) => {
+								const { writer } = conversionApi;
+								const widgetElement = writer.createContainerElement( tag );
+								return toWidgetEditable( widgetElement, writer );
 							}
 					} )
 				:
 					( {
 						model: tag,
-						view: ( modelItem, viewWriter ) => {
-								const widgetElement = viewWriter.createContainerElement( tag );
-								return toWidget( widgetElement, viewWriter );
+						view: ( modelItem, conversionApi ) => {
+								const { writer } = conversionApi;
+								const widgetElement = writer.createContainerElement( tag );
+								return toWidget( widgetElement, writer );
 							}
 					} )
 			);
